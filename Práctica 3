@@ -1,0 +1,18 @@
+/*Crear una función llamada “cursos_num_alumnos” que devuelva el
+número de alumnos de un curso que se pasa como argumento Lo
+probamos con una SELECT
+*/
+-- Antes de ejecutar la función, se debe crear una tabla que relacione los alumnos con su curso mediante el campo cod_curso.
+delimiter //
+drop function if exists cursos_num_alumnos//  -- Elimina la función si ya existe para evitar errores al crearla nuevamente
+CREATE FUNCTION cursos_num_alumnos(p_codigo int)  -- Se crea la función que recibe el código de un curso como parámetro
+RETURNS int  -- La función devuelve un valor numérico (entero)
+READs SQL data  -- Indica que la función solo lee datos, no los modifica
+BEGIN
+ declare num_alumnos int;  -- Se declara una variable para guardar la cantidad de alumnos
+ set num_alumnos=0;  -- Se inicializa la variable en 0 por defecto
+ select count(*) into num_alumnos from alumnos where cod_curso=p_codigo;  -- Se cuenta cuántos alumnos pertenecen al curso indicado
+ return num_alumnos;  -- Devuelve el total de alumnos encontrados
+end//
+-- Prueba de la función
+select nombre, cursos_num_alumnos(cod_curso) from cursos//  -- Muestra el nombre de cada curso junto con la cantidad de alumnos inscritos

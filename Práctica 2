@@ -3,14 +3,17 @@ el nombre, apellidos y correo del alumno. Debe recibir como argumentos
 los 3 datos del alumno. Lo probamos en una SELECT
 */
 
-delimiter //
-drop function if exists datos_alumno//
-CREATE FUNCTION datos_alumno(nombre VARCHAR(50), apellidos
-varchar(50),correo varchar(50))
-RETURNS VARCHAR(200)
-NO SQL
-BEGIN
- return concat(nombre,'--',apellidos,'--',correo);
-end//
-select nombre,apellidos,correo,datos_alumno(nombre,apellidos,correo)
-from alumnos//
+delimiter //  
+drop function if exists datos_alumno//   -- Elimina la función si ya existe
+
+CREATE FUNCTION datos_alumno(nombre VARCHAR(50), apellidos varchar(50), correo varchar(50))  
+RETURNS VARCHAR(200)   -- Define que la función devolverá un texto de hasta 200 caracteres
+NO SQL   -- Indica que la función no realiza operaciones sobre tablas
+BEGIN  
+ return concat(nombre,'--',apellidos,'--',correo);   -- Une los tres datos en una sola cadena separada por "--"
+END//  
+
+-- Prueba la función
+select nombre, apellidos, correo, datos_alumno(nombre,apellidos,correo)  
+from alumnos//  
+

@@ -1,3 +1,15 @@
+/* Cargar el fichero TARJETAS.SQL que contiene números de tarjeta de 2
+tipos: visa y mastercard. El fichero está en los recursos de este capítulo
+o Debemos devolver el número de tarjeta formateado . El número de
+tarjeta está dividido en 4 trozos de 4 números.
+o En el caso de VISA lo separamos con un guión “-“
+▪ 4057368927695721 → 4057-3689-2769-5721
+o En el caso de MASTERCARD lo separamos con barra
+▪ 5490322198577839 → 5490-3221-9857-7839
+o Si el número de tarjeta no tiene 16 dígitos devolvemos ‘Número
+incorrecto’
+*/
+
 delimiter //  
 drop function if exists dividir_tarjeta//  -- Elimina la función si ya existe
 

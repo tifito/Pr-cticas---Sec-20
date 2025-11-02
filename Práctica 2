@@ -1,0 +1,16 @@
+/* Crea una función llamada “datos alumno” que devuelva en un solo valor
+el nombre, apellidos y correo del alumno. Debe recibir como argumentos
+los 3 datos del alumno. Lo probamos en una SELECT
+*/
+
+delimiter //
+drop function if exists datos_alumno//
+CREATE FUNCTION datos_alumno(nombre VARCHAR(50), apellidos
+varchar(50),correo varchar(50))
+RETURNS VARCHAR(200)
+NO SQL
+BEGIN
+ return concat(nombre,'--',apellidos,'--',correo);
+end//
+select nombre,apellidos,correo,datos_alumno(nombre,apellidos,correo)
+from alumnos//

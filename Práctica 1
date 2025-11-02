@@ -1,11 +1,11 @@
 delimiter //  
-drop function if exists dividir_tarjeta//  -- Elimina la función si ya existe para evitar errores al crearla nuevamente
+drop function if exists dividir_tarjeta//  -- Elimina la función si ya existe
 
-CREATE FUNCTION dividir_tarjeta(num_tarjeta VARCHAR(16), tipo VARCHAR(10))  -- Crea la función con dos parámetros: número y tipo de tarjeta
+CREATE FUNCTION dividir_tarjeta(num_tarjeta VARCHAR(16), tipo VARCHAR(10))  -- Crea la función con los dos parametros: número y tipo de tarjeta
 RETURNS VARCHAR(50)  -- Devuelve un texto formateado con un máximo de 50 caracteres
 NO SQL  -- Indica que la función no ejecuta consultas SQL
 BEGIN
-  DECLARE bloque1 VARCHAR(4);  -- Declaración de variables para dividir el número en bloques de 4
+  DECLARE bloque1 VARCHAR(4);  -- Declara las variables para dividir el número en bloques de 4
   DECLARE bloque2 VARCHAR(4);
   DECLARE bloque3 VARCHAR(4);
   DECLARE bloque4 VARCHAR(4);
@@ -20,9 +20,9 @@ BEGIN
 
   if tipo='visa' then  -- Si la tarjeta es de tipo VISA
     SET bloque1 = SUBSTRING(num_tarjeta, 1, 4);   -- Extrae los primeros 4 dígitos
-    SET bloque2 = SUBSTRING(num_tarjeta, 5, 4);   -- Extrae del 5° al 8°
-    SET bloque3 = SUBSTRING(num_tarjeta, 9, 4);   -- Extrae del 9° al 12°
-    SET bloque4 = SUBSTRING(num_tarjeta, 13, 4);  -- Extrae del 13° al 16°
+    SET bloque2 = SUBSTRING(num_tarjeta, 5, 4);   -- Extrae del 5 al 8
+    SET bloque3 = SUBSTRING(num_tarjeta, 9, 4);   -- Extrae del 9 al 12
+    SET bloque4 = SUBSTRING(num_tarjeta, 13, 4);  -- Extrae del 13 al 16
     RETURN CONCAT(bloque1, '-', bloque2, '-', bloque3, '-', bloque4);  -- Une los bloques con guiones
   end if;
 
@@ -38,4 +38,4 @@ BEGIN
 END//
 
 -- Probar la función
-select num_tarjeta, tipo, dividir_tarjeta(num_tarjeta, tipo) from tarjetas;  -- Muestra el número original, el tipo y el resultado formateado
+select num_tarjeta, tipo, dividir_tarjeta(num_tarjeta, tipo) from tarjetas//  -- Muestra el número original, el tipo y el resultado formateado
